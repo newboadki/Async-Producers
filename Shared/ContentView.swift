@@ -25,18 +25,20 @@ struct ContentView: View {
         
         let stack = VStack {
             ScrollView {
-                grid
-                    .frame(height: 300)
+                grid // Takes the whole screen ignorig edges and siblings
             }
+            .frame(height: 600) // Tested on iPhone 13 mini
             
             Spacer()
             
             Button {
                 presenter.stop()
             } label: {
-                Text("Cancel")
+                HStack {
+                    Image(systemName: "stop")
+                    Text("Cancel")
+                }
             }
-
         }        
         
         return stack

@@ -11,13 +11,12 @@ import SwiftUI
 
 class Presenter: ObservableObject {
 
+    private var t1: Task<Void, Never>!
+    private var t2: Task<Void, Never>!
     private var process: PaintingProcess!
     private var cancellable: AnyCancellable?
-    @Published var colors: [Color] = []
-
-    var t1: Task<Void, Never>!
-    var t2: Task<Void, Never>!
     
+    @Published var colors: [Color] = []
     let N: Int = 50
     
     func setup() async {
@@ -33,7 +32,7 @@ class Presenter: ObservableObject {
                                        updateInterval: 0.5),
                          ColorProducer(maxRow: N,
                                        maxCol: N,
-                                       color: .black,
+                                       color: .green,
                                        count: 18000,
                                        updateInterval: 1.1)]
         let serializer = await ImageAccessSerializer(rowCount: N, colCount: N)
@@ -51,13 +50,11 @@ class Presenter: ObservableObject {
         do {
             try await self.process.start()
         } catch {
-            print()
+            print("The proccess failed to start.")
         }
     }
     
     func stop() {
-        
         self.process.stop()
-        
     }
 }

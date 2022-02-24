@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+/// Protects access to an array of rows of colors that will be used by the UI to draw a grid.
 actor ImageAccessSerializer {
     
     @Published private(set) var rows: [[Color]]
@@ -31,8 +32,8 @@ actor ImageAccessSerializer {
         }
 
         row[colIndex] = color
-        
         rows[rowIndex] = row
-        print("Added color \(color) at \(rowIndex), \(colIndex)")
+        
+        print("Added color \(color) at \(rowIndex), \(colIndex).")
     }
 }

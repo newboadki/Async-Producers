@@ -35,11 +35,13 @@ class PixelIterator: AsyncIteratorProtocol {
         count -= 1
         try await Task.sleep(nanoseconds: UInt64(self.updateInterval) * 1_000_000_000)
         return ColorProducer.Pixel(color: self.color,
-                     row: Int.random(in: 0...self.maxRow),
-                     col: Int.random(in: 0...self.maxCol))
+                                   row: Int.random(in: 0...self.maxRow),
+                                   col: Int.random(in: 0...self.maxCol))
     }
 }
 
+
+/// Async Seqyuence thaat uses a pixel iterator
 class ColorProducer {
     
     enum ProductionError: Error {

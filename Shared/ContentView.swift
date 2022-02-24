@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         let rows: [GridItem] = Array(repeating: .init(.flexible()), count: presenter.N)
         let grid = LazyVGrid(columns: rows) {
-            ForEach(Array(presenter.colors.enumerated()), id: \.offset) { index, color in
+            ForEach(Array(presenter.colors.enumerated()), id: \.offset) { _, color in
                 Rectangle()
                     .foregroundColor(color)
             }

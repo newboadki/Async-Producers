@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Adds concurrency to the app by creating a task group containing one task per producer,
 class PaintingProcess {
     
     private var producers: [ColorProducer]

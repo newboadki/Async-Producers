@@ -9,16 +9,20 @@ import Foundation
 import Combine
 import SwiftUI
 
+@MainActor
 class Presenter: ObservableObject {
 
+    // MARK: - Private properties
     private var t1: Task<Void, Never>!
     private var t2: Task<Void, Never>!
     private var process: PaintingProcess!
     private var cancellable: AnyCancellable?
-    
+        
+    // MARK: - Internal properties
     @Published var colors: [Color] = []
     let N: Int = 50
     
+    // MARK: - Internal API
     func setup() async {
         let producers = [ColorProducer(maxRow: N,
                                        maxCol: N,

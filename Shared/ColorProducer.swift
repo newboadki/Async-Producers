@@ -34,6 +34,7 @@ class PixelIterator: AsyncIteratorProtocol {
         }
         count -= 1
         try await Task.sleep(nanoseconds: UInt64(self.updateInterval) * 1_000_000_000)
+        print("Iterator: \(Thread.current)")
         return ColorProducer.Pixel(color: self.color,
                                    row: Int.random(in: 0...self.maxRow),
                                    col: Int.random(in: 0...self.maxCol))

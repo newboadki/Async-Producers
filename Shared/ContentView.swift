@@ -24,7 +24,19 @@ struct ContentView: View {
         }
         
         let stack = VStack {
-            grid                        
+            ScrollView {
+                grid
+                    .frame(height: 300)
+            }
+            
+            Spacer()
+            
+            Button {
+                presenter.stop()
+            } label: {
+                Text("Cancel")
+            }
+
         }        
         
         return stack

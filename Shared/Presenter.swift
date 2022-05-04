@@ -13,44 +13,29 @@ import SwiftUI
 class Presenter: ObservableObject {
 
     // MARK: - Private properties
-    private var t1: Task<Void, Never>!
-    private var t2: Task<Void, Never>!
-    private var process: PaintingProcess!
+    private var process: PaintingProcess
     private var cancellable: AnyCancellable?
         
+    init(process: PaintingProcess, n: Int) {
+        self.process = process
+        self.n = n
+    }
+        
     // MARK: - Internal properties
-    @Published var colors: [Color] = []
-    let N: Int = 50
+    @Published
+    private(set) var colors: [Color] = []
+    let n: Int
     
     // MARK: - Internal API
     func setup() async {
-        let producers = [ColorProducer(maxRow: N,
-                                       maxCol: N,
-                                       color: .yellow,
-                                       count: 9000,
-                                       updateInterval: 0.5),
-                         ColorProducer(maxRow: N,
-                                       maxCol: N,
-                                       color: .purple,
-                                       count: 9000,
-                                       updateInterval: 0.5),
-                         ColorProducer(maxRow: N,
-                                       maxCol: N,
-                                       color: .green,
-                                       count: 18000,
-                                       updateInterval: 1.1)]
-        let serializer = await ImageAccessSerializer(rowCount: N, colCount: N)
-        
-        self.cancellable = await serializer.$rows
+        self.cancellable = await process.serializer.$rows
             .receive(on: DispatchQueue.main)
             .map { matrix in
                 return matrix.flatMap { row in
                     return row
                 }
             }
-            .assign(to: \.colors, on: self)
-        
-        self.process = PaintingProcess(producers: producers, serializer: serializer)
+            .assign(to: \.colors, on: self)                
         do {
             try await self.process.start()
         } catch {

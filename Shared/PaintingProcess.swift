@@ -11,7 +11,7 @@ import Foundation
 class PaintingProcess {
     
     private var producers: [ColorProducer]
-    private var serializer: ImageAccessSerializer
+    var serializer: ImageAccessSerializer
     private var cancellableTask: Task<Void, Error>?
     
     init(producers: [ColorProducer], serializer: ImageAccessSerializer) {

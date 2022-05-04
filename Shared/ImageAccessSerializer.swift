@@ -14,11 +14,12 @@ actor ImageAccessSerializer {
     
     @Published private(set) var rows: [[Color]]
             
-    init (rowCount: Int, colCount: Int) async {
-        self.rows = []
+    init (rowCount: Int, colCount: Int) {
+        var r: [[Color]] = []
         for _ in 0..<rowCount {
-            rows.append(Array<Color>(repeating: Color.white, count: colCount))
+            r.append(Array<Color>(repeating: Color.white, count: colCount))
         }
+        self.rows = r
     }
     
     func addColorPixel(_ color: Color, rowIndex: Int, colIndex: Int) {

@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import Resolver
 
 struct ContentView: View {
     
-    @ObservedObject var presenter: Presenter = Presenter()
+    @ObservedObject var presenter: Presenter = Resolver.resolve()
     
     var body: some View {
-        let rows: [GridItem] = Array(repeating: .init(.flexible()), count: presenter.N)
+        let rows: [GridItem] = Array(repeating: .init(.flexible()), count: presenter.n)
         let grid = LazyVGrid(columns: rows) {
             ForEach(Array(presenter.colors.enumerated()), id: \.offset) { _, color in
                 Rectangle()
@@ -27,7 +28,7 @@ struct ContentView: View {
             ScrollView {
                 grid // Takes the whole screen ignorig edges and siblings
             }
-            .frame(height: 600) // Tested on iPhone 13 mini
+            .frame(height: 400) // Tested on iPhone 13 mini
             
             Spacer()
             

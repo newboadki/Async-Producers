@@ -58,8 +58,7 @@ class ColorProducer {
     private var maxRow: Int
     private var maxCol: Int
     private var color: Color
-    private var count: Int
-    private var continuation: AsyncStream<Pixel>.Continuation?
+    private var count: Int    
     private var timer: Timer?
     private var updateInterval: TimeInterval
     

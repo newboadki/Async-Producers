@@ -32,9 +32,8 @@ extension Resolver: ResolverRegistering {
         }
     }
     
-    private static func setupSharedContainer() {
-        
-        sharedContainer.register { _ -> Presenter in 
+    private static func setupSharedContainer() {        
+        sharedContainer.register { _ -> AnyGridViewPresenter in
             let N = 50
             let producers = [ColorProducer(maxRow: N,
                                            maxCol: N,
@@ -52,10 +51,7 @@ extension Resolver: ResolverRegistering {
                                            count: 18000,
                                            updateInterval: 1.1)]
             let serializer = ImageAccessSerializer(rowCount: N, colCount: N)
-            return Presenter(process: PaintingProcess(producers: producers,
-                                                      serializer: serializer),
-                             n: N)
-            
+            return AnyGridViewPresenter(concrete: GridViewDefaultPresenter(process: PaintingProcess(producers: producers, serializer: serializer), n: N))
         }
     }
     

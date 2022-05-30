@@ -10,23 +10,28 @@ import Combine
 import SwiftUI
 
 @MainActor
-class Presenter: ObservableObject {
+final class GridViewDefaultPresenter: GridViewPresenter {
 
     // MARK: - Private properties
+    @Published
+    private var _colors: [Color]
     private var process: PaintingProcess
     private var cancellable: AnyCancellable?
         
+    // MARK: - Initializers
+    
     init(process: PaintingProcess, n: Int) {
         self.process = process
         self.n = n
+        self._colors = []
     }
         
-    // MARK: - Internal properties
-    @Published
-    private(set) var colors: [Color] = []
-    let n: Int
+    // MARK: - GridViewPresenter
     
-    // MARK: - Internal API
+    var colorsPublished: Published<[Color]> {__colors}
+    var colorsPublisher: Published<[Color]>.Publisher { $_colors }
+    let n: Int
+        
     func setup() async {
         self.cancellable = await process.serializer.$rows
             .receive(on: DispatchQueue.main)
@@ -35,7 +40,7 @@ class Presenter: ObservableObject {
                     return row
                 }
             }
-            .assign(to: \.colors, on: self)                
+            .assign(to: \._colors, on: self)
         do {
             try await self.process.start()
         } catch {
@@ -44,6 +49,7 @@ class Presenter: ObservableObject {
     }
     
     func stop() {
+        self.cancellable?.cancel()
         self.process.stop()
     }
 }

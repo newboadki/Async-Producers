@@ -22,7 +22,7 @@ struct MenuButtons: View {
                     .foregroundColor(.primary)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.pink))
+                        .fill(Color.indigo))
             }
             .padding(.vertical, 10)
             Spacer()

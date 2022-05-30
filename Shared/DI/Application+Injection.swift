@@ -37,7 +37,7 @@ extension Resolver: ResolverRegistering {
             let N = 50
             let producers = [ColorProducer(maxRow: N,
                                            maxCol: N,
-                                           color: .yellow,
+                                           color: .indigo,
                                            count: 9000,
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
@@ -47,7 +47,7 @@ extension Resolver: ResolverRegistering {
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
                                            maxCol: N,
-                                           color: .green,
+                                           color: .pink,
                                            count: 18000,
                                            updateInterval: 1.1)]
             let serializer = ImageAccessSerializer(rowCount: N, colCount: N)

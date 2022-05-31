@@ -7,6 +7,7 @@
 
 import Foundation
 import Resolver
+import SwiftUI
 
 enum Environment {
     case developent, production, testing
@@ -37,17 +38,17 @@ extension Resolver: ResolverRegistering {
             let N = 50
             let producers = [ColorProducer(maxRow: N,
                                            maxCol: N,
-                                           color: .indigo,
+                                           color: Color("Blue"),
                                            count: 9000,
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
                                            maxCol: N,
-                                           color: .purple,
+                                           color: Color("Purple"),
                                            count: 9000,
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
                                            maxCol: N,
-                                           color: .pink,
+                                           color: Color("Pink"),
                                            count: 18000,
                                            updateInterval: 1.1)]
             let serializer = ImageAccessSerializer(rowCount: N, colCount: N)

@@ -25,8 +25,14 @@ struct ContentView: View {
         }
         
         let stack = ZStack {
-            ScrollView {
-                grid
+            VStack {
+                Text("Async Producers")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding(.top, 10)
+                ScrollView {
+                    grid
+                }
             }
             
             VStack {
@@ -54,7 +60,13 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
-            .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+        Group {
+            ContentView()
+                .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+
+            ContentView()
+                .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+                .preferredColorScheme(.dark)
+        }
     }
 }

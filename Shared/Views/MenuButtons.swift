@@ -22,7 +22,7 @@ struct MenuButtons: View {
                     .foregroundColor(.primary)
                     .padding()
                     .background(RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.indigo))
+                        .fill(Color("Blue")))
             }
             .padding(.vertical, 10)
             Spacer()
@@ -32,7 +32,12 @@ struct MenuButtons: View {
 
 struct MenuButtons_Previews: PreviewProvider {
     static var previews: some View {
-        MenuButtons()
-            .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+        Group {
+            MenuButtons()
+                .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+            MenuButtons()
+                .preferredColorScheme(.dark)
+                .environmentObject(AnyGridViewPresenter(concrete: GridViewPreviewPresenter()))
+        }
     }
 }

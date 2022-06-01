@@ -33,10 +33,11 @@ final class GridViewDefaultPresenter: GridViewPresenter {
     let n: Int
         
     func setup() async {
-        self.cancellable = await process.serializer.$rows
+        self.cancellable = await process.serializer.$colors            
+            .throttle(for: 0.6, scheduler: DispatchQueue.global(qos: .background), latest: true)
             .receive(on: DispatchQueue.main)
             .map { matrix in
-                return matrix.flatMap { row in
+                return matrix.compactMap { row in
                     return row
                 }
             }

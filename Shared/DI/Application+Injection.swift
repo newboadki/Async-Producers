@@ -33,23 +33,33 @@ extension Resolver: ResolverRegistering {
         }
     }
     
-    private static func setupSharedContainer() {        
+    private static func setupSharedContainer() {
         sharedContainer.register { _ -> AnyGridViewPresenter in
             let N = 50
             let producers = [ColorProducer(maxRow: N,
                                            maxCol: N,
                                            color: Color("Blue"),
+                                           count: 9000_000,
+                                           updateInterval: 0.5),
+                             ColorProducer(maxRow: N,
+                                           maxCol: N,
+                                           color: Color("Green"),
+                                           count: 9000_000,
+                                           updateInterval: 0.5),
+                             ColorProducer(maxRow: N,
+                                           maxCol: N,
+                                           color: Color("HighlighterPink"),
                                            count: 9000,
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
                                            maxCol: N,
                                            color: Color("Purple"),
-                                           count: 9000,
+                                           count: 9000_000,
                                            updateInterval: 0.5),
                              ColorProducer(maxRow: N,
                                            maxCol: N,
                                            color: Color("Pink"),
-                                           count: 18000,
+                                           count: 9000_000,
                                            updateInterval: 1.1)]
             let serializer = ImageAccessSerializer(rowCount: N, colCount: N)
             return AnyGridViewPresenter(concrete: GridViewDefaultPresenter(process: PaintingProcess(producers: producers, serializer: serializer), n: N))

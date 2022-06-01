@@ -9,28 +9,30 @@ import Foundation
 import SwiftUI
 import Combine
 
-/// Protects access to an array of rows of colors that will be used by the UI to draw a grid.
+/// Protects access to an array of colors that will be used by the UI to draw a grid.
 actor ImageAccessSerializer {
     
-    @Published private(set) var rows: [[Color]]
-            
+    @Published
+    private(set) var colors: [Color]
+    private let rowCount, colCount: Int
+
     init (rowCount: Int, colCount: Int) {
-        self.rows = Array(repeating: Array<Color>(repeating: Color.white, count: colCount),
-                          count: rowCount)
+        self.rowCount = rowCount
+        self.colCount = colCount
+        self.colors = Array(repeating: .white, count: rowCount*colCount)
     }
 
     func addColorPixel(_ color: Color, rowIndex: Int, colIndex: Int) {
-        guard (rowIndex >= 0) && (rowIndex < self.rows.count) else {
+        guard (rowIndex >= 0) && (rowIndex < rowCount) else {
             return
         }
         
-        var row = self.rows[rowIndex]
-        guard (colIndex >= 0) && (colIndex < row.count) else {
+        guard (colIndex >= 0) && (colIndex < rowCount) else {
             return
         }
 
-        row[colIndex] = color
-        rows[rowIndex] = row
+        let index = rowIndex * colCount + colIndex
+        colors[index] = color
         
         print("Added color \(color) at \(rowIndex), \(colIndex).")
     }

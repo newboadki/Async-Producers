@@ -18,7 +18,7 @@ actor ImageAccessSerializer {
     init(rowCount: Int, colCount: Int) {
         self.rowCount = rowCount
         self.colCount = colCount
-        colors = Array(repeating: .white, count: rowCount * colCount)
+        colors = Array(repeating: .clear, count: rowCount * colCount)
     }
 
     func addColorPixel(_ color: Color, rowIndex: Int, colIndex: Int) {

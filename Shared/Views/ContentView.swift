@@ -15,13 +15,16 @@ struct ContentView: View {
     @State private var cancellable: AnyCancellable?
 
     var body: some View {
-        let rows: [GridItem] = Array(repeating: .init(.flexible()), count: presenter.n)
+        
+        let rows: [GridItem] = Array(repeating: .init(.fixed(30)), count: presenter.n)
         let grid = LazyVGrid(columns: rows) {
             ForEach(Array(colors.enumerated()), id: \.offset) { _, color in
                 RoundedRectangle(cornerRadius: 3)
                     .foregroundColor(color)
             }
+            
         }
+        .padding(.horizontal)
 
         let stack = ZStack {
             VStack {
@@ -36,7 +39,7 @@ struct ContentView: View {
 
             VStack {
                 Spacer()
-                Menu()
+                Menu().padding(20)
             }
         }
         .environmentObject(presenter)

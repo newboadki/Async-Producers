@@ -61,7 +61,7 @@ extension Resolver: ResolverRegistering {
                                            count: 9_000_000,
                                            updateInterval: 1.1)]
             let serializer = ImageAccessSerializer(rowCount: N, colCount: N)
-            return AnyGridViewPresenter(concrete: GridViewDefaultPresenter(process: PaintingProcess(producers: producers, serializer: serializer), n: N))
+            return AnyGridViewPresenter(concrete: GridViewDefaultPresenter(process: PaintingProcess(producers: producers, serializer: serializer), n: 10))
         }
     }
 

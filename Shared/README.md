@@ -21,3 +21,6 @@ Coordinating everything is the _PaintingProcess_ class, which creates an async c
 - iOS 15 material blurred backgrounds.
 - Support for Light and Dark modes.
 - Dependency injection using Resolver.
+
+<img src="https://user-images.githubusercontent.com/199423/171458355-cbf59bad-1f9e-42af-b7f5-3eeb23948f22.gif" width="50%">
+

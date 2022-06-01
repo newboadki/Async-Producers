@@ -6,7 +6,7 @@ This project is a sample app to practice with Swift Concurrency actors having to
 
 ## Technical description 
 Several producers are trying to add pixels (position and color) into a 2D grid.
-- These producers conform to _AsyncSequence. 
+- These producers conform to _AsyncSequence_. 
 - There's an image serializer, an _actor_, that synchronizes access to the 2D image since all producers are concurrent.
 Coordinating everything is the _PaintingProcess_ class, which creates an async cancellable execution context. Inside, there's a task group with all producers as subtasks.
 

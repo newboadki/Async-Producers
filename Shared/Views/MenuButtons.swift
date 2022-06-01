@@ -7,9 +7,8 @@
 
 import SwiftUI
 struct MenuButtons: View {
-    
     @EnvironmentObject var presenter: AnyGridViewPresenter
-    
+
     var body: some View {
         HStack {
             Spacer()

@@ -5,16 +5,15 @@
 //  Created by Borja Arias Drake on 02.11.2021..
 //
 
-import SwiftUI
-import Resolver
 import Combine
+import Resolver
+import SwiftUI
 
 struct ContentView: View {
-    
     @InjectedObject var presenter: AnyGridViewPresenter
     @State private var colors: [Color] = []
     @State private var cancellable: AnyCancellable?
-    
+
     var body: some View {
         let rows: [GridItem] = Array(repeating: .init(.flexible()), count: presenter.n)
         let grid = LazyVGrid(columns: rows) {
@@ -23,7 +22,7 @@ struct ContentView: View {
                     .foregroundColor(color)
             }
         }
-        
+
         let stack = ZStack {
             VStack {
                 Text("Async Producers")
@@ -34,26 +33,26 @@ struct ContentView: View {
                     grid
                 }
             }
-            
+
             VStack {
                 Spacer()
                 Menu()
             }
         }
         .environmentObject(presenter)
-        .onAppear() {
+        .onAppear {
             cancellable = presenter.colorsPublisher
                 .sink { newColors in
                     colors = newColors
                 }
         }
-        .onDisappear() {
+        .onDisappear {
             cancellable?.cancel()
         }
         .task {
             await presenter.setup()
         }
-                
+
         return stack
     }
 }

@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct Menu: View {
-    
     @EnvironmentObject var presenter: AnyGridViewPresenter
-    
+
     var body: some View {
         Rectangle()
             .fill(.clear)
@@ -26,13 +25,13 @@ struct Menu: View {
 }
 
 final class GridViewPreviewPresenter: GridViewPresenter {
-    var colorsPublished: Published<[Color]> {_colors}
-    var colorsPublisher: Published<[Color]>.Publisher {$colors}
-    
+    var colorsPublished: Published<[Color]> { _colors }
+    var colorsPublisher: Published<[Color]>.Publisher { $colors }
+
     @Published
     private var colors: [Color] = []
     var n: Int = 50
-        
+
     func setup() async {}
     func stop() {}
 }
